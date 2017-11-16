@@ -50,9 +50,66 @@ The EC2 console will now download the private key for your newly created key pai
 
 Don’t lose this and store it in a safe place! It effectively authenticates you when using AWS programmatically. You don’t want someone else impersonating you or using your credentials. We’ll be using this private key later in the lab.
 
-# Module 1 – Creating your first compute instance
+# Module 1 - Moving research data into and out of Amazon S3
 
-In this module we'll create our first compute instance on Amazon EC2. We'll use a tool called Alces Flight to get started quickly.
+Very often you'll want to move data efficiently into the cloud so you can work on it.
+
+There are a number of ways of doing this. One common way of moving data around quickly and securely is to use the [AWS CLI](https://aws.amazon.com/cli/). There are other graphical user interface tools that make it easy to move data into and out of AWS too, like [Cyberduck](https://cyberduck.io/). This is what we'll be using today.
+
+## Installing Cyberduck
+
+Go to the [Cyberduck website](https://cyberduck.io/), download the client for your operating system (Windows or OS X), and install it. Once installed, run the program. You should see something similar to this:
+
+![Cyberduck](images/cyberduck.png)
+
+What we need to do is configure our AWS credentials to securely authenticate and connect to the S3 service. This will let us view buckets, and upload data. We've already created an S3 bucket for you called **kzn-lab** and we'll be using that today as the target we'll upload data to and from.
+
+To do this, we'll need to create a new connection to S3. In your Cyberduck application, click **Open Connection**. You should see something like the following:
+
+![Cyberduck](images/cyberduck-open-connection.png)
+
+Here we'll need our **AWS Access Key ID** and **AWS Secret Access Key ID** for the lab user we're using. You'll get this from the lab environment details page for the user you logged into the AWS lab account with.
+
+Take your **Access Key ID** and your **Secret Access Key ID** and copy/paste them into Cyberduck. Once done, click the **Connect** button.
+
+If you were successful, you should see one or more S3 buckets. One of which should be called **kzn-lab**:
+
+![Cyberduck](images/cyberduck-buckets.png)
+
+We'll use the **kzn-lab** bucket to move data into and out of the cloud.
+
+## Uploading data
+
+To upload data, double click on the **kzn-lab** bucket and make sure you've navigated to it. You should see the contents of the bucket now (either empty or with some data in it from other users).
+
+From Cyberduck again, click the **Actions** dropdown. You should see the following actions:
+
+![Cyberduck](images/cyberduck-actions.png)
+
+Click **upload** and browse to a local file on your laptop you'd like to upload. Bear in mind, this is shared bucket. Everyone in the lab account has access to it. Within your own AWS account you will be the only person who can see and share data (by default), unless you choose to open up access to other users. How to do this securely is beyond the scope of this lab, but if you'd like to learn more about securely sharing data in Amazon S3 have a look at [Managing Access Permissions to Your Amazon S3 Resources](http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+
+Once you've started uploading data, Cyberduck will give you a nice indication of the progress of your upload:
+
+![Cyberduck](images/cyberduck-uploading.png)
+
+Once your upload is complete, you should see:
+
+![Cyberduck](images/cyberduck-upload-complete.png)
+
+## A few words on Amazon S3
+
+It's worth making a few comments about Amazon S3. S3 is designed to provide 99.999999999% durability and 99.99% availability. In the Sydney AWS region, it costs roughly 2.5c per GB per month for data stored there. It
+
+There are also different storage tiers which are even more cost effective. To learn more, visit [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/).
+
+Some of the largest research datasets in the world are stored in S3 and accessed incredibly frequently and at massive scale by researchers all around the globe. For example, all of our [AWS Open Data](https://aws.amazon.com/opendata) datasets are stored on S3. Some of the more interesting datasets you can use for free are available at [Earth on AWS](https://aws.amazon.com/earth/). In fact, one of the datasets we'll be using today is the [NEXRAD on AWS](https://aws.amazon.com/public-datasets/nexrad/) dataset from the US National Oceanic and Atmospheric Administration (NOAA).
+
+# Module 2 – Creating your first compute environment
+
+In this module we'll create our first compute environment on Amazon EC2. We'll use a tool called [Alces Flight](https://alces-flight.com) to get started quickly.
+
+
+
 
 # Summary
 
