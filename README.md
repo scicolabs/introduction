@@ -4,5 +4,5 @@ This is a collection of AWS hands-on labs covering the basics to you get started
 
 ## Introduction to Research Computing on AWS
 
-- [Introduction to Research Computing on AWS](intro.md) Lab
+- [Introduction to Research Computing on AWS](Intro.md) Lab
 
