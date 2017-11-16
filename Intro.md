@@ -66,7 +66,7 @@ What we need to do is configure our AWS credentials to securely authenticate and
 
 To do this, we'll need to create a new connection to S3. In your Cyberduck application, click **Open Connection**. You should see something like the following:
 
-![Cyberduck](images/cyberduck-open-connection.png)
+![Cyberduck - Open connection](images/cyberduck-open-connection.png)
 
 Here we'll need our **AWS Access Key ID** and **AWS Secret Access Key ID** for the lab user we're using. You'll get this from the lab environment details page for the user you logged into the AWS lab account with.
 
@@ -74,7 +74,7 @@ Take your **Access Key ID** and your **Secret Access Key ID** and copy/paste the
 
 If you were successful, you should see one or more S3 buckets. One of which should be called **kzn-lab**:
 
-![Cyberduck](images/cyberduck-buckets.png)
+![Cyberduck - Browsing S3 buckets](images/cyberduck-buckets.png)
 
 We'll use the **kzn-lab** bucket to move data into and out of the cloud.
 
@@ -84,17 +84,17 @@ To upload data, double click on the **kzn-lab** bucket and make sure you've navi
 
 From Cyberduck again, click the **Actions** dropdown. You should see the following actions:
 
-![Cyberduck](images/cyberduck-actions.png)
+![Cyberduck - Actions menu](images/cyberduck-actions.png)
 
 Click **upload** and browse to a local file on your laptop you'd like to upload. Bear in mind, this is shared bucket. Everyone in the lab account has access to it. Within your own AWS account you will be the only person who can see and share data (by default), unless you choose to open up access to other users. How to do this securely is beyond the scope of this lab, but if you'd like to learn more about securely sharing data in Amazon S3 have a look at [Managing Access Permissions to Your Amazon S3 Resources](http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
 
 Once you've started uploading data, Cyberduck will give you a nice indication of the progress of your upload:
 
-![Cyberduck](images/cyberduck-uploading.png)
+![Cyberduck - Uploading](images/cyberduck-uploading.png)
 
 Once your upload is complete, you should see:
 
-![Cyberduck](images/cyberduck-upload-complete.png)
+![Cyberduck - Upload complete](images/cyberduck-upload-complete.png)
 
 ## A few words on Amazon S3
 
@@ -106,10 +106,47 @@ Some of the largest research datasets in the world are stored in S3 and accessed
 
 # Module 2 – Creating your first compute environment
 
-In this module we'll create our first compute environment on Amazon EC2. We'll use a tool called [Alces Flight](https://alces-flight.com) to get started quickly.
+In this module we'll create our first compute environment on Amazon EC2. We'll use a tool called [Alces Flight](https://alces-flight.com) to get started quickly. Alces Flight is available in the [AWS Marketplace](https://aws.amazon.com/marketplace).
+
+Today, we'll be using the [Alces Flight Solo (Community Edition)](https://aws.amazon.com/marketplace/pp/B01GC9E3OG?qid=1510807355800).
+
+1. Browse to the [Alces Flight Solo (Community Edition)](https://aws.amazon.com/marketplace/pp/B01GC9E3OG?qid=1510807355800) in the AWS Marketplace.
+2. On the right-hand side of the marketplace listing you should see  a **Region** drop-down. Today we're going to be using the **Asia Pacific (Sydney)** region. Please don't try and use the Tokyo or Mumbai or Frankfurt regions. You can try those out later :)  
+  
+	![Alces Flight Solo from the AWS Marketplace](images/aws-marketplace-region.png)
+
+3. We'll also make sure we're using the **Single AMI** delivery method. This will give us a usable Alces Flight environment with a single node. This is all we need to get started with our work in the cloud.
+4. Once you have these options selected, click the **Continue** button.
+5. On the next screen, click the **Launch with one click** button. Your new Alces Flight compute environment is now launching!
+
+If you browse back to the EC2 Console, you should see a new EC2 instance starting. This is yours.
+
+## Connecting to your Flight compute environment
+
+We'll now connect to our new compute environment. To do this we'll use SSH.
+
+## Starting a Linux desktop session
+
+## Connecting to your Linux desktop session over VNC
+
+Once you've connected to your Linux desktop on your Flight compute environment you should see:
+
+![Linux Desktop on your Flight compute environment](images/linux-desktop-flight.png)
+
+Now we're getting somewhere!
+
+## Mapping NEXRAD Radar data with CartoDB
+
+The following section was taken from an excellent tutorial by [Stuart Lynn](https://carto.com/blog/author/stuart-lynn/) published on the [Carto.com](https://carto.com/) blog, called [Mapping NOAA NEXRAD radar data with CartoDB](https://carto.com/blog/mapping-nexrad-radar-data/).
 
 
+You can copy files from the NEXRAD archive by using the AWS CLI on your flight compute environment:
 
+For example:
+
+	aws s3 cp aws s3 cp s3://noaa-nexrad-level2/2014/07/03/KMHX/KMHX20140703_182118_V06.gz ./
+
+We'll install NOAA's Climate Toolkit. To do this, [download the Linux version](https://www.ncdc.noaa.gov/wct/app/dist/wct-4.0.6.zip).
 
 # Summary
 
