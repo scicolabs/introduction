@@ -271,7 +271,7 @@ You should see a Jupyter notebook environment load, something like:
 
 1. Open a new Terminal in your Jupyter environment and do the following:
 
-	`https://github.com/scicolabs/Weather-Data-Eng-Pipeline.git`
+	`git clone https://github.com/scicolabs/Weather-Data-Eng-Pipeline.git`
 	
 	This contains some great code example written by Martin Bertin. The original Github repository can be found at [https://github.com/MarvinBertin/Weather-Data-Eng-Pipeline](https://github.com/MarvinBertin/Weather-Data-Eng-Pipeline).
 
@@ -282,6 +282,10 @@ You should see a Jupyter notebook environment load, something like:
 	To run this, browse into the **Weather-Data-Eng-Pipeline** folder and then click on the **PART2-Weather_Data_Batch_Mapping_Visualization.ipynb** notebook.
 	
 3. You should see the notebook load in a new browser tab/window. Step through the code in this notebook.
+
+4. This notebook is using the NEXRAD archive stored on Amazon S3 as part of the AWS Open Data program.
+
+![Notebook plots](images/jupyter-notebook-plots.png)
 
 ## Starting a Linux desktop session and connecting to it using VNC
 
