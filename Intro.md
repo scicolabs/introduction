@@ -143,7 +143,7 @@ Now we want to look at the status of our new compute environment launching from 
 
 	![EC2 Console - tagging your instance](images/aws-ec2-tagged.png)
 		
-	5. Now if you browse back to the EC2 console and list instances again in the future, you'll see your named instance in the list.
+5. Now if you browse back to the EC2 console and list instances again in the future, you'll see your named instance in the list.
 
 ## Connecting to your Flight compute environment
 
