@@ -293,15 +293,16 @@ Alces Flight gives us some neat functionality that makes it really easy to do th
 
 	`alces session avail`
 	
-	2. You should see a list of available VNC sessions you can start. We're going to start the Gnome session. To do this type:
+2. You should see a list of available VNC sessions you can start. We're going to start the Gnome session. To do this type:
 
 	`alces session start gnome`
 	
-	3. Your Flight compute environment will have just configured itself for VNC and will have setup a Gnome desktop session that you can now connect to. To try this you will need a VNC client on your laptop.
+3. Your Flight compute environment will have just configured itself for VNC and will have setup a Gnome desktop session that you can now connect to. To try this you will need a VNC client on your laptop.
 
 	**For OS X:**
 
 	On OS X you can just use the Finder.app to connect to your desktop.
+	
 		1. Go to Finder and click on the **Go** menu
 		2. Select **Connect to server**
 		3. In the **Server Address** field, enter the VNC session string that your Flight environment gave you, e.g. vnc://alces:ac2SxctI@54.252.193.251:5901
@@ -309,8 +310,6 @@ Alces Flight gives us some neat functionality that makes it really easy to do th
 	If you were successful, you should see an Alces Flight logo on Gnome desktop session like the one below:
 
 ![Linux Desktop on your Flight compute environment](images/linux-desktop-flight.png)
-
-
 
 ## Mapping NEXRAD Radar data with CartoDB
 
