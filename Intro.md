@@ -137,11 +137,11 @@ Now we want to look at the status of our new compute environment launching from 
 
 	Once you select your keypair name from the list, the filter will only show **your instance**.
 	
-3. We're doing to do one more bit of housekeeping before we finish with the EC2 console. We're going to **tag** our instance so we can find it easily in the future. If you mouseover your instance, you'll see a small pencil icon appear  over the **Name** field. Click on the pencil icon
+3. We're going to do one more bit of housekeeping before we finish with the EC2 console. We're going to **tag** our instance so we can find it easily in the future. If you mouseover your instance, you'll see a small pencil icon appear  over the **Name** field. Click on the pencil icon
 
 4. A field will appear. Type something that you'll remember so you can find your instance easily in the future. You can always use filters like we did above, but sometimes it's easier to just see your instance at a glance. For example, I've called my instance:
 
-		![EC2 Console - tagging your instance](images/aws-ec2-tagged.png)
+	![EC2 Console - tagging your instance](images/aws-ec2-tagged.png)
 		
 	5. Now if you browse back to the EC2 console and list instances again in the future, you'll see your named instance in the list.
 
