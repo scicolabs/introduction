@@ -121,7 +121,7 @@ Today, we'll be using the [Alces Flight Solo (Community Edition)](https://aws.am
   
 	![Alces Flight Solo - selecting keypair and security group](images/aws-marketplace-sg-keypair.png)
   
-5. We also need to make sure that **our** keypair is selected. **This is important**. If you select the default or someone else's keypair, **you won't be able to connect to your compute environment**.  
+5. We also need to make sure that **our keypair** is selected. **This is important**. If you select the default or someone else's keypair, **you won't be able to connect to your compute environment**.  
 
 	Make sure you select the keypair you created earlier in the lab.
 
@@ -130,15 +130,16 @@ Today, we'll be using the [Alces Flight Solo (Community Edition)](https://aws.am
 Now we want to look at the status of our new compute environment launching from the EC2 console. To do this:
 
 1. Browse back to the EC2 Console, and click on **Instances** again in the left hand navigation. You may see multiple compute environments launching. This is because we are effectively launching many environments in parallel - one for each person doing the lab! The cloud is good at doing things in parallel :)
+
 2. Nevertheless, we want to find **our** compute environment. To do this, we'll filter the instances and use the **Key Name** attribute. To do this, click on the top search box above the list of instanced in the EC2 console, and type **Key Name**. You should see a list of key names autocomplete. See below:
 
 	![EC2 Console - filter by keyname](images/aws-ec2-filter-keyname.png)
 
 	Once you select your keypair name from the list, the filter will only show **your instance**.
 	
-	
-	3. We're doing to do one more bit of housekeeping before we finish with the EC2 console. We're going to **tag** our instance so we can find it easily in the future. If you mouseover your instance, you'll see a small pencil icon appear  over the **Name** field. Click on the pencil icon
-	4. A field will appear. Type something that you'll remember so you can find your instance easily in the future. You can always use filters like we did above, but sometimes it's easier to just see your instance at a glance. For example, I've called my instance:
+3. We're doing to do one more bit of housekeeping before we finish with the EC2 console. We're going to **tag** our instance so we can find it easily in the future. If you mouseover your instance, you'll see a small pencil icon appear  over the **Name** field. Click on the pencil icon
+
+4. A field will appear. Type something that you'll remember so you can find your instance easily in the future. You can always use filters like we did above, but sometimes it's easier to just see your instance at a glance. For example, I've called my instance:
 
 		![EC2 Console - tagging your instance](images/aws-ec2-tagged.png)
 		
