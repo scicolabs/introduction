@@ -21,9 +21,12 @@ To successfully complete this lab, you should be familiar with the following:
 
 This lab will take you through:
 
-- Creating Jupyter Notebook environments on AWS
-- Using very simple notebook examples to step through and interactively run code in your Jupyter Notebook environment on AWS
-- Explore [Apache MXNet](http://mxnet.io/) to develop, train and evaluate deep learning models using GPUs in AWS
+- Using client side tools to move data into an out of Amazon S3
+- Creating a compute environment on AWS using Alces Flight
+- Connecting to our remote compute environment using SSH
+- Starting and using a Jupyter Notebook from our Alces Flight environment
+	- Using this Jupyter environment to interact with and process some sample NEXRAD data from NOAA.
+- Starting a remove VNC session on our compute environment and connecting remotely to a Linux desktop environment
 
 ## Sign in to the AWS Management Console
 
@@ -145,19 +148,169 @@ Now we want to look at the status of our new compute environment launching from 
 		
 5. Now if you browse back to the EC2 console and list instances again in the future, you'll see your named instance in the list.
 
-## Connecting to your Flight compute environment
+## Connecting to your Flight compute environment using SSH
 
-We'll now connect to our new compute environment. To do this we'll use SSH.
+To connect to our compute environment we first need to know what the public DNS name for the instance is.
 
-## Starting a Linux desktop session
+To do this, browse to the EC2 console, and select your compute environment. In the instance details pane at the bottom of the screen you should see the Public DNS name for the instance. The following screenshot shows this:
 
-## Connecting to your Linux desktop session over VNC
+![Public DNS for your instance](images/aws-public-dns-instance.png)
 
-Once you've connected to your Linux desktop on your Flight compute environment you should see:
+Copy this DNS name into your clipboard. We'll refer to it later when we're connecting to our instance via SSH.
+
+***OS X / Linux***
+
+If you're using **OS X** or **Linux**, you can simply use the built in SSH client. To do this:
+
+1. Open a terminal window
+2. Make sure the permissions on your private key are correct (you should have done this when you created your key):  
+  
+	`chmod 400 <<your_private_key.pem>>` 
+
+	and then type the following:  
+  
+	`ssh -i your_private_key.pem>> -L 8888:localhost:8888 alces@ec2_publicdns_name
+`
+
+	Where,
+
+	**ec2_publicdns_name** is the DNS name for your EC2 instance
+	**your_private_key.pem** is the path to your private key you downloaded earlier
+
+	***Windows***
+
+	If you're using **Windows**, you can use the PuTTY program to connect to your EC2 instance over SSH and setup the SSH tunnel. To do this, follow [Setting up an SSH tunnel with PuTTY](http://realprogrammers.com/how_to/set_up_an_ssh_tunnel_with_putty.html).
+
+	What we are doing here is creating a secure tunnel between your local computer and the server. This means all traffic will be encrypted and we won't be exposing any unsecured public ports on the internet. This makes our connection to the Jupyter instance considerably more secure.
+
+3. After you've figured this out you should have a remote SSH session to your very first compute environment using Alces Flight, and should see something like the screenshot below:
+
+![Alces Flight ASCII art](images/alces-flight-login.png)
+
+## Configuring our compute environment
+
+The first thing you should note is that our flight compute environment isn't fully configured yet. This is obvious from the message when we first log in:
+
+	Configuration of this node has not yet been completed and it is not yet operational.
+
+To do finish configuration for our node, we'll type a single command at the command line prompt:
+
+`alces configure node`
+
+The 'alces configure' command will prompt us for some information. Just hit enter and accept all default.
+
+Our Flight environment will now go and configure itself, and prompt us when it's finished - it'll take about 60 seconds. While you wait, you might be wondering why we need to do this. Our Flight environment as it stands right now is a simple single instance. Today we'll just be using it as a single compute environment in the cloud. However, Flight is considerably more powerful than this. We can come back at a later date and configure our Flight environment to be a self-contained HPC cluster if we so wish. We might start with a single instance, use it for prototyping and testing, and then when we want access to more compute or memory, or we want to run real-world, large HPC type applications, we can use the same compute environment and "scale" it up to a fully featured HPC cluster with as many nodes, cores, memory as we desire. This is a really powerful feature of the cloud - you can start small, and scale up only when you need it.
+
+Once our Flight compute environment has finished configuring itself, you'll see your command line prompt update with a message saying so. Something like:
+
+![Alces Flight - node configuration](images/alces-flight-configuration.png)
+
+**Once you see this, log out of your SSH session, and reconnect.** This is the easiest way for our current session to be updated.
+
+## Exploring Alces Gridware
+
+Another neat thing we have at our fingertips is a huge range of software.
+
+At the command prompt, type the following:
+
+`alces gridware list`
+
+You should see a large number of different software packages we can install. We're going to install Anaconda (which also installed Jupyter for us).
+
+To do this, again at the command prompt, type:
+
+`alces gridware list anaconda*`
+
+You'll see the Anaconda package available. To install it, type:
+
+`alces gridware install main/apps/anaconda3`
+
+Once gridware has finished installing this, we'll need to **enable** it using the **module** subsystem.
+
+To do this, type:
+
+`module avail`
+
+You should see all the modules available for you to enable on your Flight compute instance. We'll just enable the Anaconda3 module.
+
+To do this, type:
+
+`module load apps/anaconda3`
+
+We'll also install some python modules we'll be using in this lab now. To do this, type:
+
+`conda install -c anaconda netcdf4 numpy boto3`
+
+We also need the geopy and awscli Python modules:
+
+`pip install geopy awscli`
+
+And finally, we also need to install py-ART:
+
+	git clone https://github.com/ARM-DOE/pyart.git
+	cd pyart
+	python setup.py install --user
+	cd ..
+	export HDF5_DISABLE_VERSION_CHECK=2
+
+Now we can run a Jupyter notebook. Let's try it:
+
+`jupyter notebook --no-browser`
+
+## Using Jupyter on your Flight environment
+
+If you've got this far, you should now have the Jupyter notebook server running on your Flight compute environment. Because we connected to our EC2 instance by setting up an SSH tunnel, we can connect to our Jupyter notebook from our local laptop just like it was running locally. It's not though, it's running in the cloud.
+
+To test this, open a web browser on your laptop or local machine, and browser to:
+
+`http://localhost:8888/`
+
+You should see a Jupyter notebook environment load, something like:
+
+![Your Jupyter notebook environment](images/alces-flight-jupyter-notebook.png)
+
+1. Open a new Terminal in your Jupyter environment and do the following:
+
+	`https://github.com/scicolabs/Weather-Data-Eng-Pipeline.git`
+	
+	This contains some great code example written by Martin Bertin. The original Github repository can be found at [https://github.com/MarvinBertin/Weather-Data-Eng-Pipeline](https://github.com/MarvinBertin/Weather-Data-Eng-Pipeline).
+
+2. Once you've cloned this repository into your Jupyter notebook environement you should be able to run the sample notebooks.  
+  
+	The notebook we'll be focusing on is called **PART2-Weather_Data_Batch_Mapping_Visualization.ipynb**.
+	
+	To run this, browse into the **Weather-Data-Eng-Pipeline** folder and then click on the **PART2-Weather_Data_Batch_Mapping_Visualization.ipynb** notebook.
+	
+3. You should see the notebook load in a new browser tab/window. Step through the code in this notebook.
+
+## Starting a Linux desktop session and connecting to it using VNC
+
+Another feature that we get with our Flight compute environment is a full Linux desktop environment. Sometimes you'll want to install local desktop tools on your compute environment in the cloud, so it's useful to be able to remotely connect to a desktop session on your compute environment to interactively run those.
+
+Alces Flight gives us some neat functionality that makes it really easy to do this. In this section we'll explore this.
+
+1. From your SSH session from your Alces Flight compute environment, type the following:
+
+	`alces session avail`
+	
+	2. You should see a list of available VNC sessions you can start. We're going to start the Gnome session. To do this type:
+
+	`alces session start gnome`
+	
+	3. Your Flight compute environment will have just configured itself for VNC and will have setup a Gnome desktop session that you can now connect to. To try this you will need a VNC client on your laptop.
+
+	**For OS X:**
+
+	On OS X you can just use the Finder.app to connect to your desktop.
+		1. Go to Finder and click on the **Go** menu
+		2. Select **Connect to server**
+		3. In the **Server Address** field, enter the VNC session string that your Flight environment gave you, e.g. vnc://alces:ac2SxctI@54.252.193.251:5901
+		
+	If you were successful, you should see an Alces Flight logo on Gnome desktop session like the one below:
 
 ![Linux Desktop on your Flight compute environment](images/linux-desktop-flight.png)
 
-Now we're getting somewhere!
+
 
 ## Mapping NEXRAD Radar data with CartoDB
 
