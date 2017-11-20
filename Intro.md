@@ -51,9 +51,11 @@ Welcome to this self-paced lab! The first step is for you to sign in to Amazon W
 4. Give your Key Pair a unique name, e.g. **lab61**
 5. Click the **Create** button
 
-The EC2 console will now download the private key for your newly created key pair. Before we can use the private key we’ll need to update the permissions on it. To do this type:
+The EC2 console will now download the private key for your newly created key pair. If you're using Linux or OS X, we'll need to update the permissions on this file. To do this, type:
 
     chmod 0400 lab61.pem
+
+If you're using Windows, you don't need to do this step.
 
 Don’t lose this and store it in a safe place! It effectively authenticates you when using AWS programmatically. You don’t want someone else impersonating you or using your credentials. We’ll be using this private key later in the lab.
 
