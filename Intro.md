@@ -30,7 +30,7 @@ This lab will take you through:
 - Connecting to our remote compute environment using SSH
 - Starting and using a Jupyter Notebook from our Alces Flight environment
 	- Using this Jupyter environment to interact with and process some sample NEXRAD data from NOAA.
-- Starting a remove VNC session on our compute environment and connecting remotely to a Linux desktop environment
+- Starting a remote VNC session on our compute environment and connecting remotely to a Linux desktop environment
 
 ## Sign in to the AWS Management Console
 
