@@ -1,11 +1,13 @@
 # Introduction to Research Computing on AWS
 ## Introduction
 
-In this lab, you will be introduced to the basic tools required to get started with Research Computing on AWS. A key ingredient for any research work is data. We’ll show you how to move data into and out of the AWS cloud efficiently and securely using the AWS CLI tool and Amazon S3.
+In this lab, you will be introduced to a number of basic tools required to get started with Research Computing on AWS. A key ingredient for any research work is data. We’ll show you how to move data into and out of the AWS cloud efficiently and securely using both an example desktop application, as well as the AWS Python SDK and the AWS CLI tool and Amazon S3.
 
 When it comes to processing and analyzing that data, AWS offers a massive array of tools and platforms you might be interested in; from small to very large computers, powerful virtual scientific workstations with GPUs for data visualisation, big data tools like Hadoop and Spark, relational databases like Postgres (with PostGIS for geospatial work), and even your own personal HPC clusters in the cloud.
 
-We’ll start at the beginning though. After moving data into S3, we’ll show you how to start your own powerful Linux workstation using a AWS partner solution called Alces Flight. To start with, this will give you a very capable Linux workstation in the cloud, with lots of software at your fingertips ready to install. We’ll install some scientific software and interact with the data we’ve moved into S3. Once we’ve done that though, we’ll show you how easy it is to turn this simple workstation into your own personal HPC cluster. The focus of this lab won’t be on HPC, but we have other courses we run that teach you how to do scalable high throughput or high performance work on AWS using tools like Alces Flight and AWS Batch or how to do big data analytics on AWS using Apache Hadoop and Spark with Amazon EMR etc.
+We’ll start at the beginning though. After moving data into S3, we’ll show you how to start your own powerful cloud compute environment using a AWS partner solution called Alces Flight. To start with, this will give you a very capable Linux server environment in the cloud, with lots of software at your fingertips ready to install. We’ll install Jupyter (also known as IPython), and some scientific computing libraries and work with data in one of our Open Data collections, NEXRAD from NOAA. Once we’ve done that though, we'll also show you how easy it is to get a remote desktop session to your compute environment in case you want to install desktop tools.
+
+Alces Flight is much more powerful than this though. I can be extended to become your very own personal HPC cluster. Showing you how to do this is beyond the scope of this introductory course, but we have other courses that take you through how to use Alces Flight to do large scale high performance or high throughput computing.
 
 The great thing about AWS is you can start simply and with a small amount of resources, but quickly scale that up to some of the largest infrastructure in the world if you need it. You get to decide what you need, and you have complete control over what scale of resources you use. We think you’ll be pleasantly surprised at how easy it is to get started doing meaningful research work on the cloud!
 
@@ -13,8 +15,10 @@ The great thing about AWS is you can start simply and with a small amount of res
 
 To successfully complete this lab, you should be familiar with the following:
 
-- Introductory familiarity with SSH and Linux
-- Command line familiarity – copy files/data
+- Familiarity with an SSH client for your desktop operating system (e.g. PuTTY or a native SSH client)
+- Basic familiarity with SSH and Linux
+- Linux command line familiarity – copy files/data
+- Some programming knowledge (Python preferred)
 - Linux desktop (e.g. Gnome) experience not necessary, but helpful
 
 ## Topics Covered
