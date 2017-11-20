@@ -5,6 +5,7 @@ This is a collection of AWS hands-on labs covering the basics to you get started
 ## Introduction to Research Computing on AWS
 
 - [Introduction to Research Computing on AWS](Intro.md) Lab
+- [Lab environment details](https://s3-ap-southeast-2.amazonaws.com/scico-labs/lab-env.html)
 
 ## Presentations
 
