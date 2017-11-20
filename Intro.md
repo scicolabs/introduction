@@ -304,13 +304,19 @@ You should see a Jupyter notebook environment load, something like:
 	
 	This contains some great code example written by Martin Bertin. The original Github repository can be found at [https://github.com/MarvinBertin/Weather-Data-Eng-Pipeline](https://github.com/MarvinBertin/Weather-Data-Eng-Pipeline).
 
-2. Once you've cloned this repository into your Jupyter notebook environement you should be able to run the sample notebooks.  
+2. Once you've cloned this repository into your Jupyter notebook environment you should be able to run the sample notebooks.  
   
 	The notebook we'll be focusing on is called **PART2-Weather_Data_Batch_Mapping_Visualization.ipynb**.
 	
 	To run this, browse into the **Weather-Data-Eng-Pipeline** folder and then click on the **PART2-Weather_Data_Batch_Mapping_Visualization.ipynb** notebook.
 	
+	![Navigating to Weather notebooks](images/jupyter-notebook-navigating.png)
+	
 3. You should see the notebook load in a new browser tab/window. Step through the code in this notebook.
+
+	The first plot we do of the NEXRAD data is Hurricane Katrina:
+
+	![Hurricane Katrina](images/jupyter-notebook-hurricane.png)
 
 4. This notebook is using the NEXRAD archive stored on Amazon S3 as part of the AWS Open Data program.
 
