@@ -8,4 +8,4 @@ This is a collection of AWS hands-on labs covering the basics to you get started
 
 ## Presentations
 
-- [An Introduction to Research Computing on AWS](Research+Computing+Introduction.pdf)
+- [An Introduction to Research Computing on AWS](Research+Computing+Introduction.pdf) (PDF version)
