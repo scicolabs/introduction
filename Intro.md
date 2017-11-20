@@ -177,13 +177,13 @@ If you're using **OS X** or **Linux**, you can simply use the built in SSH clien
 	**ec2_publicdns_name** is the DNS name for your EC2 instance
 	**your_private_key.pem** is the path to your private key you downloaded earlier
 
-	***Windows***
+***Windows***
 
-	If you're using **Windows**, you can use the PuTTY program to connect to your EC2 instance over SSH and setup the SSH tunnel. To do this, follow [Setting up an SSH tunnel with PuTTY](http://realprogrammers.com/how_to/set_up_an_ssh_tunnel_with_putty.html).
+If you're using **Windows**, you can use the PuTTY program to connect to your EC2 instance over SSH and setup the SSH tunnel. To do this, follow [Setting up an SSH tunnel with PuTTY](http://realprogrammers.com/how_to/set_up_an_ssh_tunnel_with_putty.html).
 
-	What we are doing here is creating a secure tunnel between your local computer and the server. This means all traffic will be encrypted and we won't be exposing any unsecured public ports on the internet. This makes our connection to the Jupyter instance considerably more secure.
+What we are doing here is creating a secure tunnel between your local computer and the server. This means all traffic will be encrypted and we won't be exposing any unsecured public ports on the internet. This makes our connection to the Jupyter instance considerably more secure.
 
-3. After you've figured this out you should have a remote SSH session to your very first compute environment using Alces Flight, and should see something like the screenshot below:
+After you've figured this out you should have a remote SSH session to your very first compute environment using Alces Flight, and should see something like the screenshot below:
 
 ![Alces Flight ASCII art](images/alces-flight-login.png)
 
@@ -197,7 +197,7 @@ To do finish configuration for our node, we'll type a single command at the comm
 
 `alces configure node`
 
-The 'alces configure' command will prompt us for some information. Just hit enter and accept all default.
+The 'alces configure' command will prompt us for some information. Just hit enter and accept all defaults.
 
 Our Flight environment will now go and configure itself, and prompt us when it's finished - it'll take about 60 seconds. While you wait, you might be wondering why we need to do this. Our Flight environment as it stands right now is a simple single instance. Today we'll just be using it as a single compute environment in the cloud. However, Flight is considerably more powerful than this. We can come back at a later date and configure our Flight environment to be a self-contained HPC cluster if we so wish. We might start with a single instance, use it for prototyping and testing, and then when we want access to more compute or memory, or we want to run real-world, large HPC type applications, we can use the same compute environment and "scale" it up to a fully featured HPC cluster with as many nodes, cores, memory as we desire. This is a really powerful feature of the cloud - you can start small, and scale up only when you need it.
 
@@ -225,7 +225,7 @@ You'll see the Anaconda package available. To install it, type:
 
 `alces gridware install main/apps/anaconda3`
 
-Once gridware has finished installing this, we'll need to **enable** it using the **module** subsystem.
+Gridware will go off and download the package for us and any dependencies and then install it. N.B. it could take up to 1 minute for this to complete. Once installed, we'll need to **enable** the new package using the **module** subsystem.
 
 To do this, type:
 
@@ -237,9 +237,15 @@ To do this, type:
 
 `module load apps/anaconda3`
 
-We'll also install some python modules we'll be using in this lab now. To do this, type:
+### Python modules, weather radar data and AWS SDKs
+
+We'll also install some python modules we'll be using later in this lab. To do this, type:
 
 `conda install -c anaconda netcdf4 numpy boto3`
+
+Select that you wish to proceed if prompted and wait for the system to download and install these modules. This could take some time, perhaps as long as 5-6 minutes. Perhaps grab a cup of coffee or help the person next to you if you're ahead of them :)
+
+What these Python modules will let us do is connect to Amazon S3, download weather data from the NEXRAD archive and then parse and manipulate this data in [NetCDF](https://en.wikipedia.org/wiki/NetCDF) format. NetCDF is very commonly used in the scientific computing world for creating and sharing array-oriented data.
 
 We also need the geopy and awscli Python modules:
 
@@ -247,13 +253,36 @@ We also need the geopy and awscli Python modules:
 
 And finally, we also need to install py-ART:
 
+	cd ~
 	git clone https://github.com/ARM-DOE/pyart.git
 	cd pyart
 	python setup.py install --user
-	cd ..
+	cd ~
+	mkdir data
 	export HDF5_DISABLE_VERSION_CHECK=2
+	
 
-Now we can run a Jupyter notebook. Let's try it:
+This will take about 1 minute to install. [Py-ART](http://arm-doe.github.io/pyart/) or the Python ARM Radar Toolkit, is a really neat module that gives you the ability to use a whole range of weather radar primitives and algorithms. We won't be covering it in detail, but we will be using it soon to visualize some of the NEXRAD weather data.
+
+### Setting up the AWS SDK
+
+Before we're ready to do some data munging and visualisation we need to do one more thing, setup credentials for the AWS SDK.
+
+1. To do this, from your Terminal window, run:
+
+	`aws configure`
+
+2. The first thing you'll be prompted for is your **AWS Access Key ID**. Go back to the lab environment page, and for your username get the AWS Access Key from the 3rd column in the table. It will probably start with something like 'AKIA...'
+
+3. The second credential you'll need to enter is your **AWS Secret Access Key**. This is in the fourth column in the lab environment details page for your user name. Copy and paste that into the Terminal window.
+
+4. Where you are prompted for **Default region name** and **Default output format** just leave both blank and **hit enter** twice.
+
+Now, what this has done is configure our compute environment to know how to authenticate as our lab user and use the AWS APIs, either via the AWS CLI or using one of the AWS SDKs. If you were watching really closely earlier, we installed a Python module called **boto3** which is the Python 3 AWS SDK. We'll be using that in a minute.
+
+Finally, we can now we can run a Jupyter notebook with all the dependencies we need installed and configured!
+
+To do this, type the following in your Terminal window:
 
 `jupyter notebook --no-browser`
 
