@@ -354,14 +354,17 @@ Alces Flight gives us some neat functionality that makes it really easy to do th
 
 The following section was taken from an excellent tutorial by [Stuart Lynn](https://carto.com/blog/author/stuart-lynn/) published on the [Carto.com](https://carto.com/) blog, called [Mapping NOAA NEXRAD radar data with CartoDB](https://carto.com/blog/mapping-nexrad-radar-data/).
 
+1. Open a Terminal from your Linux desktop.
 
-You can copy files from the NEXRAD archive by using the AWS CLI on your flight compute environment:
+2. You can copy files from the NEXRAD archive by using the AWS CLI on your flight compute environment:
 
-For example:
+	For example:
 
-	aws s3 cp aws s3 cp s3://noaa-nexrad-level2/2014/07/03/KMHX/KMHX20140703_182118_V06.gz ./
+		aws s3 cp s3://noaa-nexrad-level2/2014/07/03/KMHX/KMHX20140703_182118_V06.gz ./
 
-We'll install NOAA's Climate Toolkit. To do this, [download the Linux version](https://www.ncdc.noaa.gov/wct/app/dist/wct-4.0.6.zip).
+3. If you want to, have a go at installing NOAA's Climate Toolkit. To do this, [download the Linux version](https://www.ncdc.noaa.gov/wct/app/dist/wct-4.0.6.zip), and follow the installation instructions.
+
+Once installed, try the tutorial above. It does something very similar to what we just did in a Jupyter notebook environment, but with Linux desktop tools instead.
 
 # Summary
 
